@@ -34,16 +34,16 @@ drt = 7;
 epsilon = 4;
 % Pathloss coefficient
 L = 1e-3; % average signal power attenuation at reference distance (d_ref = 1)
-pl_r = L*(dsr^-epsilon);  % avarage channel gain of S-R    (also be the Rayleight scale parameter) 
-pl_m = L*(dsr^-epsilon);  % avarage channel gain of R-M    (also be the Rayleight scale parameter) 
-% pl_r = L*(dsr^-epsilon);  % avarage channel gain of R-T  
+pl_r = L*(dsr^-epsilon);  % average channel gain of S-R    (also be the Rayleigh scale parameter) 
+pl_m = L*(dsr^-epsilon);  % average channel gain of R-M    (also be the Rayleigh scale parameter) 
+% pl_r = L*(dsr^-epsilon);  % average channel gain of R-T  
 
 %%% Signal received at R_X: y_r = ctranspose(h_r)* w *s + noise
 
-% Number of channel relization 
+% Number of channel realization 
 iteration = 1e5;
 %% MRT-beamforming
-% Initial complex Rayleight channel at each iteration
+% Initial complex Rayleigh channel at each iteration
 for i = 1:iteration
     channel_h = random('Ray',sqrt(pl_r/2), [Nt,1]).*exp(1i*2*pi*rand(Nt,1));
     % MRT beamforming weight 
