@@ -66,10 +66,10 @@ end
 %% Compare Results:
 figure(1)
 hold on; grid on;
-semilogy(p_dB,OP_sim,'r-o', 'LineWidth',2); 
-semilogy(p_dB,OP_theory,'k-+', 'LineWidth',2);
-semilogy(p_dB,OP_sim_omit,'r--s', 'LineWidth',2);
-semilogy(p_dB,OP_theory,'k--d', 'LineWidth',2);
+semilogy(P_dB,OP_sim,'rd', 'LineWidth',2); 
+semilogy(P_dB,OP_theory,'k-+', 'LineWidth',2);
+semilogy(P_dB,OP_sim_omit,'y*', 'LineWidth',2);
+semilogy(P_dB,OP_theory,'gs', 'LineWidth',2);
 
 legend('Simulation with not omit','Theory with not omit','Simulation with omit','Theory with omit' );
 
