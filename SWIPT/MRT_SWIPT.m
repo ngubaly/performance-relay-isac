@@ -3,17 +3,17 @@ clear;
 close all;
 %% Initial for transmitter
 % Number of transmit antenna
-Nt = 2; 
+Nt = 5; 
 % Transmit power 
-P_dB = -10:1:20;            %in dBm scale
-p_dB = (1e-3)*db2pow(P_dB); % in linear scale (W) 
+P_dB = -10:2.5:20;            %in dBm scale
+p_dB = db2pow(P_dB); % in linear scale (W) 
 % Bandwidth
-BW = 1e9;                             % Bandwidth = 1 GHz
+% BW = 1e9;                             % Bandwidth = 1 GHz
 % Initial AWGN antenna noise and processing noise
-Sigma_a = -174 + 10*log10(BW);        % Antenna noise power in dBm
-sigma_a = (1e-3)*db2pow(Sigma_a);     % Antenna noise power in linear scale
-Sigma_p = - 100 ;                     % Processing noise power in dBm
-sigma_p = (1e-3)*db2pow(Sigma_p);     % Processing noise power in linear scale      
+% Sigma_a = -174 + 10*log10(BW);        % Antenna noise power in dBm
+sigma_a = 1e-7;     % Antenna noise power in linear scale
+% Sigma_p = - 70 ;                     % Processing noise power in dBm
+sigma_p = 1e-5;     % Processing noise power in linear scale      
 %% Initial for Energy Harvesting circuit
 rho = 0.3;  % The power splitting ratio 
 eta = 0.7;  % The energy harvesting efficiency
@@ -52,16 +52,17 @@ for i = 1:iteration
 end 
 % Simulation
 for idx = 1:length(p_dB)
-    snr = 2*(1-rho)*(1e-3)*p_dB(idx)*abs(Channel).^2 /((1-rho)*sigma_a + sigma_p);  % Not omit the antenna noise
-    snr_omit = 2*(1-rho)*(1e-3)*p_dB(idx)*abs(Channel).^2 /sigma_p;    % Omit the antenna noise
+    snr = 2*(1-rho)*p_dB(idx)*(abs(Channel).^2) /((1-rho)*sigma_a + sigma_p);  % Not omit the antenna noise
+    snr_omit = 2*(1-rho)*p_dB(idx)*(abs(Channel).^2) /sigma_p;    % Omit the antenna noise
     OP_sim(idx) = sum(snr < gammar_th )/iteration;
     OP_sim_omit(idx) = sum(snr_omit < gammar_th )/iteration;
 end
 % Theory
 for idx = 1:length(p_dB)
-    OP_theory(idx) =  1 - igamma(Nt, gammar_th/(2*(1-rho)*p_dB(idx))/(pl_r*((1-rho)*sigma_a + sigma_p)))/gamma(Nt);         % Not omit the antenna noise
-    OP_theory_omit(idx) =  1 - igamma(Nt, gammar_th/(2*(1-rho)*p_dB(idx))/(pl_r*sigma_p))/gamma(Nt);    % Omit the antenna noise
-end
+    OP_theory(idx) =  1 - igamma(Nt, ((1-rho)*sigma_a + sigma_p)*gammar_th/(2*(1-rho)*p_dB(idx)*pl_r))/gamma(Nt);         % Not omit the antenna noise
+    OP_theory_omit(idx) =  1 - igamma(Nt, sigma_p * gammar_th/(2*(1-rho)*p_dB(idx)*pl_r))/gamma(Nt);                        % Omit the antenna noise
+end 
+
 %% Compare Results:
 figure(1)
 hold on; grid on;
