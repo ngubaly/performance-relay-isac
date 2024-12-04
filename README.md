@@ -233,3 +233,35 @@ int main() {
 
     return 0;
 }
+
+
+
+
+
+uint8_t program[] = {
+    0x20, 0x01, // 0x00: Load immediate 1 into R0
+    0x11,       // 0x02: Move R0 to R1
+    0x20, 0x05, // 0x03: Load immediate 5 into R0
+    0x12,       // 0x05: Move R0 to R2
+    0x62,       // 0x06: Label_Loop: Compare R2 with 0
+    0x20, 0x20, // 0x07: Load address of End (0x20) into R0
+    0xE0,       // 0x09: Conditional Branch to R0 if Zero
+    0x20, 0x00, // 0x0A: Load immediate 0 into R3
+    0x13,       // 0x0C: Move R3 to R3 (clear R3)
+    0x12,       // 0x0D: Move R2 to R0 (inner_counter)
+    0x60,       // 0x0E: Label_Mult: Compare R0 with 0
+    0x21, 0x19, // 0x0F: Load address of After_Mult (0x19) into R1
+    0xE1,       // 0x11: Conditional Branch to R1 if Zero
+    0x3F,       // 0x12: Add R1 to R3, result in R3
+    0x20, 0x01, // 0x13: Load immediate 1 into R3
+    0x43,       // 0x15: Subtract R3 from R0, result in R0
+    0x20, 0x0E, // 0x16: Load address of Label_Mult (0x0E) into R0
+    0xF0,       // 0x18: Unconditional Branch to R0
+    0x1E,       // 0x19: After_Mult: Move R3 to R1
+    0x20, 0x01, // 0x1A: Load immediate 1 into R0
+    0x4A,       // 0x1C: Subtract R0 from R2, result in R2
+    0x20, 0x06, // 0x1D: Load address of Label_Loop (0x06) into R0
+    0xF0,       // 0x1F: Unconditional Branch to R0
+    0x65,       // 0x20: End: Output R1
+    0x00        // 0x21: NOP (End of Program)
+};
