@@ -6,7 +6,7 @@ This repository contains the graduation thesis titled "Performance analysis of I
 ### Thesis Overview
 
 This thesis focuses on the performance analysis of wireless communication systems that integrate **Integrated Sensing and Communication (ISAC)** technology with **Energy Harvesting (EH)** capabilities. The work explores the theoretical and practical aspects of how these two advanced technologies can be synergistically combined to enhance the efficiency and sustainability of next-generation wireless networks.
-System model:
+# System model:
 [![System Model](system_model.png)](system_model.png)
 
 Key areas of investigation include:
