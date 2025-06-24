@@ -3,9 +3,6 @@
 This repository contains the graduation thesis titled "Performance analysis of ISAC-assisted wireless systems with energy harvesting" submitted by Nguyen Ba Linh to Hanoi University of Science and Technology.
 
 ---
-
-## English Description
-
 ### Thesis Overview
 
 This thesis focuses on the performance analysis of wireless communication systems that integrate **Integrated Sensing and Communication (ISAC)** technology with **Energy Harvesting (EH)** capabilities. The work explores the theoretical and practical aspects of how these two advanced technologies can be synergistically combined to enhance the efficiency and sustainability of next-generation wireless networks.
